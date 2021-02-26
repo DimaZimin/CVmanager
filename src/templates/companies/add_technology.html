@@ -1,10 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+    <div id="page-wrapper">
+        <div class="header">
+            <h1 class="page-header">Add new technology
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li><a href="{% url "companies_list" %}">Companies</a></li>
+                <li><a href="{% url "companies_add" %}">Add new company</a></li>
+                <li class="active">Add technology</li>
+            </ol>
+        </div>
+        <div id="page-inner">
+                       <div class="row">
+                               <div class="panel-body">
+                                    <form id="techno" action="{% url 'companies_add_technology' %}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="col col-lg-6">
+                                            {{ form.non_field_errors }}
+                                            {{ form.name.errors }}
+                                            <p>{{ form.name.label|lower }}</p>
+                                            {{ form.name }}
+                                        </div>
+                                        <div class="col col-lg-12">
+                                            <p>
+                                                <button type="submit" class="btn btn-default">Add</button>
+                                            </p>
+                                        </div>
+                                    </form>
+                               </div>
+                       </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block javascript %}
+    <script>
+        $("#techno").submit(function (e){
+            e.preventDefault();
+            var serializedData = $(this).serialize();
+            console.log(serializedData)
+            $.ajax({
+                type: "POST",
+                url: "{% url 'companies_add_technology' %}",
+                data: serializedData,
+                success: function (response) {
+                    $("#techno").trigger('reset');
+                    $("#techno-input").focus();
+                },
+                error: function (response) {
+                    alert(response["responseJSON"]["error"]);
+                }
+            })
+        })
+
+    </script>
+{% endblock javascript  %}

@@ -43,7 +43,7 @@ class Company(models.Model):
         ('100+', '500+')
     ]
 
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
     industry = models.ForeignKey('Industry', on_delete=models.CASCADE)
     technologies = models.ManyToManyField('Technology', null=True)
     established_year = models.IntegerField(validators=[MinValueValidator(2000), max_value_current_year])
@@ -54,8 +54,14 @@ class Company(models.Model):
 
 
 class Technology(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Industry(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
+
+    def __str__(self):
+        return self.name

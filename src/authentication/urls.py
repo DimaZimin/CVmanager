@@ -4,5 +4,4 @@ from . import views
 
 urlpatterns = [
     url(r'^login/$', views.login, name='authenticate_login')
-
 ]
