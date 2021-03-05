@@ -1,49 +1,97 @@
-from django.contrib import messages
-from django.core import serializers
-from django.http import JsonResponse
+from bootstrap_modal_forms.generic import BSModalCreateView, BSModalDeleteView, BSModalReadView, BSModalUpdateView
 from django.shortcuts import render
+from companies.models import Company, Technology, Industry
 
-# Create your views here.
-from companies.models import Company, Technology
-
-from companies.forms import CompanyForm, TechnologyForm
+from companies.forms import CompanyForm, TechnologyForm, IndustryForm
+from django.urls import reverse_lazy
 
 
 def company_list(request):
     companies = Company.objects.all()
+    return render(request, 'companies/list.html', context={"companies": companies})
+
+
+def content_manager(request):
+    technologies = Technology.objects.all()
+    industries = Industry.objects.all()
     return render(
         request,
-        'companies/list.html',
+        'companies/content_manager.html',
         context=
         {
-            "companies": companies
+            "technologies": technologies,
+            "industries": industries,
         }
     )
 
 
-def company_add(request):
-    form = CompanyForm(request.POST or None)
-    return render(request,
-                  'companies/add.html',
-                  context={"form": form})
+class TechnologyCreateView(BSModalCreateView):
+    template_name = 'companies/content/technology_create.html'
+    form_class = TechnologyForm
+    success_message = 'Success: created!'
+    success_url = reverse_lazy('content_manager')
 
 
-def content_manager(request):
-    pass
+class TechnologyUpdateView(BSModalUpdateView):
+    model = Technology
+    template_name = 'companies/content/technology_update.html'
+    form_class = TechnologyForm
+    success_message = 'Success: updated!'
+    success_url = reverse_lazy('content_manager')
 
 
-def add_technology(request):
-    if request.is_ajax() and request.method == "POST":
-        form = TechnologyForm(request.POST)
-        if form.is_valid():
-            instance = form.save()
-            serialized_instance = serializers.serialize('json', [instance, ])
-            messages.add_message(request, messages.INFO, "Success")
-            return JsonResponse({"instance": serialized_instance}, status=200)
-        else:
-            return JsonResponse({"error": form.errors}, status=400)
-    if request.method == "GET":
-        form = TechnologyForm()
-        return render(request, "companies/add_technology.html", context={"form": form
-        })
-    return JsonResponse({"error": ""}, status=400)
+class TechnologyDeleteView(BSModalDeleteView):
+    model = Industry
+    template_name = 'companies/content/technology_delete.html'
+    success_message = 'Success: deleted!'
+    success_url = reverse_lazy('content_manager')
+
+
+class IndustryCreateView(BSModalCreateView):
+    template_name = 'companies/content/industry_create.html'
+    form_class = IndustryForm
+    success_message = 'Success: created!'
+    success_url = reverse_lazy('content_manager')
+
+
+class IndustryUpdateView(BSModalUpdateView):
+    model = Industry
+    template_name = 'companies/content/industry_update.html'
+    form_class = IndustryForm
+    success_message = 'Success: updated!'
+    success_url = reverse_lazy('content_manager')
+
+
+class IndustryDeleteView(BSModalDeleteView):
+    model = Industry
+    template_name = 'companies/content/industry_delete.html'
+    success_message = 'Success: deleted!'
+    success_url = reverse_lazy('content_manager')
+
+
+class CompanyCreateView(BSModalCreateView):
+    model = Company
+    template_name = 'companies/company_create.html'
+    form_class = CompanyForm
+    success_message = 'Success: created!'
+    success_url = reverse_lazy('companies_list')
+
+
+class CompanyUpdateView(BSModalUpdateView):
+    model = Company
+    template_name = 'companies/company_update.html'
+    form_class = CompanyForm
+    success_message = 'Success: updated!'
+    success_url = reverse_lazy('companies_list')
+
+
+class CompanyDeleteView(BSModalDeleteView):
+    model = Company
+    template_name = 'companies/company_delete.html'
+    success_message = 'Success: deleted!'
+    success_url = reverse_lazy('companies_list')
+
+
+class CompanyReadView(BSModalReadView):
+    model = Company
+    template_name = 'companies/company_read.html'

@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'companies',
     'applications',
     'authentication',
-
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [

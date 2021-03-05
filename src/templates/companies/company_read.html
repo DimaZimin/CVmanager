@@ -1,0 +1,58 @@
+{% load widget_tweaks %}
+<div class="modal-header">
+    <h3 class="modal-title">Company details
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </h3>
+</div>
+<div class="modal-body">
+    <div class="">
+        Company: {{ company.name }}
+    </div>
+    {% if company.industry %}
+    <div class="">
+        Industry: {{ company.industry }}
+    </div>
+    {% endif %}
+    <div class="">
+        Technologies:
+        {% for technology in  company.technologies.all %}
+            {% if forloop.last %}
+                {{ technology }}.
+            {% else %}
+                {{ technology }},
+            {% endif %}
+        {% empty %}
+            N/A
+        {% endfor %}
+    </div>
+    {% if company.established_year %}
+    <div class="">
+        Established year: {{ company.established_year }}
+    </div>
+    {% endif %}
+    {% if company.description %}
+    <div class="">
+        Description: {{ company.description }}
+    </div>
+    {% endif %}
+    {% if company.comany_size %}
+    <div class="">
+        Company size: {{ company.comany_size }}
+    </div>
+    {% endif %}
+    {% if company.location %}
+    <div class="">
+        Location: {{ company.location }}
+    </div>
+    {% endif %}
+    {% if company.url %}
+    <div class="">
+        url: {{ company.url }}
+    </div>
+    {% endif%}
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
