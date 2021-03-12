@@ -5,7 +5,7 @@ from companies.models import Company
 
 class Application(models.Model):
     class Status(models.TextChoices):
-        APPLIED = 'APPLIED', _('Applied')
+        APPLIED = 'APPLIED', _('No respond')
         RESPOND = 'RESPOND', _('Respond received'),
         REJECTED = 'REJECTED', _('Rejected'),
         INVITED = 'INVITED', _('Interview invitation received'),
@@ -15,21 +15,16 @@ class Application(models.Model):
 
     date = models.DateField()
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
-    position = models.ForeignKey('Position', on_delete=models.PROTECT)
-    portal = models.ForeignKey('JobPortal', on_delete=models.PROTECT)
+    position = models.CharField(max_length=200)
+    portal = models.CharField(max_length=200)
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.APPLIED)
 
-
-class JobPortal(models.Model):
-    name = models.CharField(max_length=255)
-    url = models.URLField()
-
-
-class Position(models.Model):
-    name = models.CharField(max_length=255)
+    @classmethod
+    def get_statuses(cls):
+        return [status.label for status in cls.Status]
 
 
 class Resume(models.Model):
     name = models.CharField(max_length=255)
-    position = models.ForeignKey(Position, on_delete=models.PROTECT)
+    position = models.CharField(max_length=200)
     file = models.FileField(upload_to='resume')

@@ -1,58 +1,57 @@
 {% load widget_tweaks %}
 <div class="modal-header">
-    <h3 class="modal-title">Company details
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </h3>
+    <h3 class="modal-title">Company details</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>
 <div class="modal-body">
     <div class="">
-        Company: {{ company.name }}
+        <p>Company: {{ company.name }}</p>
     </div>
     {% if company.industry %}
-    <div class="">
-        Industry: {{ company.industry }}
-    </div>
+        <div class="">
+            <p>Industry: {{ company.industry }}</p>
+        </div>
     {% endif %}
     <div class="">
-        Technologies:
-        {% for technology in  company.technologies.all %}
-            {% if forloop.last %}
-                {{ technology }}.
-            {% else %}
-                {{ technology }},
-            {% endif %}
-        {% empty %}
-            N/A
-        {% endfor %}
+        <p>Technologies:
+            {% for technology in  company.technologies.all %}
+                {% if forloop.last %}
+                    {{ technology }}.
+                {% else %}
+                    {{ technology }},
+                {% endif %}
+            {% empty %}
+                N/A
+            {% endfor %}</p>
     </div>
     {% if company.established_year %}
-    <div class="">
-        Established year: {{ company.established_year }}
-    </div>
+        <div class="">
+            <p>Established year: {{ company.established_year }}</p>
+        </div>
     {% endif %}
     {% if company.description %}
-    <div class="">
-        Description: {{ company.description }}
-    </div>
+        <div class="">
+            <p>Description: {{ company.description }}</p>
+        </div>
     {% endif %}
     {% if company.comany_size %}
-    <div class="">
-        Company size: {{ company.comany_size }}
-    </div>
+        <div class="">
+            <p>Company size: {{ company.comany_size }}</p>
+        </div>
     {% endif %}
     {% if company.location %}
-    <div class="">
-        Location: {{ company.location }}
-    </div>
+        <div class="">
+            <p>Location: {{ company.location }}</p>
+        </div>
     {% endif %}
     {% if company.url %}
-    <div class="">
-        url: {{ company.url }}
-    </div>
-    {% endif%}
+        <div class="">
+            <p>url: <a href="{{ company.url }}">{{ company.url }}</a></p>
+        </div>
+    {% endif %}
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>

@@ -32,6 +32,7 @@ class CompanyForm(BSModalModelForm):
 
 
 class TechnologyForm(BSModalModelForm):
+
     def __init__(self, *args, **kwargs):
         super(TechnologyForm, self).__init__(*args, **kwargs)
         for name in self.fields.keys():

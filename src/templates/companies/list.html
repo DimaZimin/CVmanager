@@ -12,96 +12,214 @@
         </div>
     </div>
     {#    MODAL END #}
-    <div id="page-wrapper">
-    <div class="header">
-        <h1 class="page-header">Companies
-        </h1>
+    <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb">
-            <li><a href="#">Home</a></li>
-
-            <li class="active">Companies</li>
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Companies</li>
         </ol>
-    </div>
-    <div id="page-inner">
-        <div class="modal fade" tabindex="-1" role="dialog" id="modal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content"></div>
+    </nav>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h6><a class="" data-toggle="collapse" href="#collapseTechnologies" role="button"
+                           aria-expanded="false"
+                           aria-controls="collapseTechnologies">Technologies
+                    </a>
+                        <button type="button" id="technology-create" class="btn btn-primary btn-sm">add</button>
+                    </h6>
+                </div>
+                <div class="collapse" id="collapseTechnologies">
+                    <div class="card-body">
+                        <table class="table table-striped table-hover table-responsive"
+                               id="technology-table">
+                            <thead>
+                            <tr>
+                                <th class="col-lg-10">Name</th>
+                                <th class="col-lg-2">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for technology in technologies %}
+                                <tr>
+                                    <td class="col-10">{{ technology.name }}</td>
+                                    <td class="col-2">
+                                        <div class="row">
+                                            <button type="button" id="technology-update"
+                                                    class="bs-modal btn btn-sm btn-primary"
+                                                    data-form-url="{% url 'technology_update' technology.id %}">
+                                                <span class="fa fa-pencil"></span>
+                                            </button>&nbsp;
+                                            <button type="button" id="technology-delete"
+                                                    class="btn btn-danger btn-sm bs-modal"
+                                                    data-form-url="{% url 'technology_delete' technology.id %}"><i
+                                                    class="fa fa-trash-o"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="7" class="text-center bg-warning">No technology</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="panel panel-default">
-                        <div class="panel-heading">
-                             Companies
-                            <small><button type="button" id="company-create" class="btn btn-primary btn-xs">Add company</button></small>
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <thead>
-                                        <tr>
-                                            <th>Company</th>
-                                            <th>Industry</th>
-                                            <th>Technologies</th>
-                                            <th>Location</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for company in companies %}
-                                        {% if forloop.counter0|divisibleby:2 %}
-                                            <tr class="even gradeX">
-                                        {% else %}
-                                            <tr class="even gradeX">
-                                        {% endif %}
-                                            <td>{{ company.name }}</td>
-                                            <td>{{ company.industry }}</td>
-                                            <td>{% for technology in  company.technologies.all %}
-                                                {% if forloop.last %}
-                                                    {{ technology }}.
-                                                {% else %}
-                                                    {{ technology }},
-                                                {% endif %}
-                                                {% empty %}
-                                                    N/A
-                                                {% endfor %}
-                                            </td>
-                                            <td>{{ company.location }}</td>
-                                            <td>
-                                                <button type="button" id="read-company" class="bs-modal btn btn-xs btn-primary" data-form-url="{% url 'company_read' company.pk %}">
-                                                    <span class="fa fa-eye"></span>
-                                                </button>
-                                                <button type="button" id="company-update" class="bs-modal btn btn-xs btn-primary" data-form-url="{% url 'company_update' company.id %}">
-                                                    <span class="fa fa-pencil"></span>
-                                                </button>
-                                                <button type="button" id="company-delete" class="btn btn-danger btn-xs bs-modal" data-form-url="{% url 'company_delete' company.id %}">
-                                                    <span class="fa fa-trash-o"></span>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    {% empty %}
-                                        <tr>
-                                            <td class="text-center bg-warning" colspan="7">No companies</td>
-                                        </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h6><a class="" data-toggle="collapse" href="#collapseIndustries" role="button"
+                           aria-expanded="false"
+                           aria-controls="collapseIndustries">Industries
+                    </a>
+                        <button type="button" id="industry-create" class="btn btn-primary btn-sm">add</button>
+                    </h6>
+                </div>
+                <div class="collapse" id="collapseIndustries">
+                    <div class="card-body">
+                        <table class="table table-striped table-hover table-responsive" id="industries">
+                            <thead>
+                            <tr>
+                                <th class="col-lg-10">Name</th>
+                                <th class="col-lg-2">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for industry in industries %}
+                                <tr>
+                                    <td>{{ industry.name }}</td>
+                                    <td>
+                                        <div class="row">
+                                            <button type="button" id="industry-update"
+                                                    class="bs-modal btn btn-sm btn-primary"
+                                                    data-form-url="{% url 'industry_update' industry.id %}">
+                                                <span class="fa fa-pencil"></span>
+                                            </button>&nbsp;
+                                            <button type="button" id="industry-delete"
+                                                    class="btn btn-danger btn-sm bs-modal"
+                                                    data-form-url="{% url 'industry_delete' industry.id %}">
+                                                <span class="fa fa-trash-o"></span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="7" class="text-center bg-warning">No industry</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="header-title">Companies<small>
+                        <button type="button" id="company-create" class="btn btn-primary btn-sm">add company</button>
+                    </small></h5>
+                </div>
+                <div class="panel-body col-lg-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="dataTables-example">
+                            <thead>
+                            <tr>
+                                <th>Company</th>
+                                <th>Industry</th>
+                                <th>Technologies</th>
+                                <th>Location</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for company in companies %}
+                                <tr>
+                                    <td>{{ company.name }}</td>
+                                    <td>{{ company.industry }}</td>
+                                    <td>{% for technology in  company.technologies.all %}
+                                        {% if forloop.last %}
+                                            {{ technology }}.
+                                        {% else %}
+                                            {{ technology }},
+                                        {% endif %}
+                                    {% empty %}
+                                        N/A
+                                    {% endfor %}
+                                    </td>
+                                    <td>{{ company.location }}</td>
+                                    <td>
+                                        <button type="button" id="read-company" class="bs-modal btn btn-sm btn-primary"
+                                                data-form-url="{% url 'company_read' company.pk %}">
+                                            <span class="fa fa-eye"></span>
+                                        </button>
+                                        <button type="button" id="company-update"
+                                                class="bs-modal btn btn-sm btn-primary"
+                                                data-form-url="{% url 'company_update' company.id %}">
+                                            <span class="fa fa-pencil"></span>
+                                        </button>
+                                        <button type="button" id="company-delete" class="btn btn-danger btn-sm bs-modal"
+                                                data-form-url="{% url 'company_delete' company.id %}">
+                                            <span class="fa fa-trash-o"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td class="text-center bg-warning" colspan="7">No companies</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 {% endblock content %}
 {% block javascript %}
     <script type="text/javascript">
         $(function () {
             $(".bs-modal").each(function () {
-            $(this).modalForm({formURL: $(this).data('form-url')
+                $(this).modalForm({
+                    formURL: $(this).data('form-url')
+                });
+            });
+            $("#company-create").modalForm({
+                formURL: "{% url 'company_create' %}",
+                modalID: "#create-modal"
             });
         });
-        $("#company-create").modalForm({
-            formURL: "{% url 'company_create' %}",
-            modalID: "#create-modal"
-        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $(".bs-modal").each(function () {
+                $(this).modalForm({
+                    formURL: $(this).data('form-url')
+                });
+            });
+            $("#technology-create").modalForm({
+                formURL: "{% url 'technology_create' %}",
+                modalID: "#create-modal"
+            });
         });
     </script>
-{% endblock javascript  %}
+    <script type="text/javascript">
+        $(function () {
+            $(".bs-modal").each(function () {
+                $(this).modalForm({
+                    formURL: $(this).data('form-url')
+                });
+            });
+            $("#industry-create").modalForm({
+                formURL: "{% url 'industry_create' %}",
+                modalID: "#create-modal"
+            });
+        });
+    </script>
+{% endblock javascript %}

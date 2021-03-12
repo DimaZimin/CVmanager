@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     'bootstrap_modal_forms',
     'smart_selects',
     'companies',
+    'dashboard',
     'applications',
     'authentication',
-    'widget_tweaks'
+    'widget_tweaks',
+    'chartjs'
 ]
 
 MIDDLEWARE = [

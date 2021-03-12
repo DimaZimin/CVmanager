@@ -1,17 +1,65 @@
 {% extends "base.html" %}
+{% load filters %}
 {% block content %}
-<div id="page-wrapper">
-    <div class="header">
-        <h1 class="page-header">Dashboard <small>Welcome John Doe</small>
-        </h1>
+    <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Dashboard</a></li>
-            <li class="active">Data</li>
+            <li class="breadcrumb-item"><a href="">Dashboard</a></li>
         </ol>
-    </div>
-    <div id="page-inner">
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2> Your application statistics</h2>
+                <h3>
+                    You have applied {{ total_applications }} times
+                </h3>
+                {% for item in zipper %}
+                    <h5>
+                        {{ item.0 }}: {{ item.1 }}
+                    </h5>
+                {% endfor %}
+            </div>
+            <div class="col-md-6">
+                <canvas id="applications-chart" height="260">
+                    <p>Application pie chart</p>
+                </canvas>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-6">
 
+            </div>
+            <div class="col-6">
+
+            </div>
+
+        </div>
     </div>
-</div>
 {% endblock content %}
+{% block javascript %}
+    <script>
+        var config = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: {{ data|safe }},
+                    backgroundColor: [
+                        '#E6E1C5', '#D4CB92', '#395C6B', '#80A4ED', '#BCD3F2', '#ef8157',
+                        '#17a2b8'
+                    ],
+                    label: "Applications"
+                }],
+                labels: {{ labels|safe }}
+            },
+            options: {
+                responsive: true
+            }
+        };
+
+        window.onload = function () {
+            var ctx = document.getElementById('applications-chart').getContext('2d');
+            window.pieChart = new Chart(ctx, config)
+        }
+    </script>
+{% endblock javascript %}
