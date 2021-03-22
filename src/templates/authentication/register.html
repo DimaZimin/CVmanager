@@ -1,0 +1,47 @@
+{% extends 'base_no_menu.html' %}
+{% block content %}
+    <div class="container h-100">
+        <div class="row align-items-center h-100">
+            <div class="col-12 col-sm-8 col-md-6 mx-auto">
+                <div class="card h-100 justify-content-center">
+                    <div class="card-header header-title text-center">
+                        <h4>
+                            Sign up
+                        </h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="col-12 col-sm-8 col-md-10 mx-auto">
+                            {% if error %}
+                                <div id="error-message" class="alert alert-danger alert-dismissible fade show">
+                                    <b>Provided login or password is incorrect. Please try again.</b>
+                                </div>
+                            {% endif %}
+                            <form name="register" id="register" method="post">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                            </form>
+                            <div class="form-group">
+                                <div class="ml-auto mr-auto">
+                                    <button type="submit" form="register" class="btn btn-primary btn-round">
+                                        Register
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="ml-auto mr-auto">
+                                    <p>Already have an account?</p>
+                                    <a class="page-link" href="{% url 'authentication_login' %}">Sign in</a>
+                                </div>
+                            </div>
+                            <div class="card-footer ml-auto mr-auto">
+                                <p><a href="">MyHire.com</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+{% endblock javascript %}

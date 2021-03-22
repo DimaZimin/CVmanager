@@ -7,18 +7,16 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-
     <div class="modal-body">
         <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
             {% for error in form.non_field_errors %}
                 {{ error }}
             {% endfor %}
         </div>
-
-        {% for field in form %}
+        {% for field in form.hidden_fields %}
             <div class="form-group">
-                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                {% render_field field class="form-control" placeholder=field.label %}
+                <label for="{{ field.id_for_label }}" hidden>{{ field.label }}</label>
+                {% render_field field class="form-control" %}
                 <div class="{% if field.errors %} invalid{% endif %}">
                     {% for error in field.errors %}
                         <p class="help-block">{{ error }}</p>
@@ -26,8 +24,122 @@
                 </div>
             </div>
         {% endfor %}
+        <div class="form-group">
+            <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+            {% render_field form.name class="form-control" value=company.name %}
+            <div class="{% if form.name.errors %} invalid{% endif %}">
+                {% for error in form.name.errors %}
+                    <p class="help-block">{{ error }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="{{ form.industry.id_for_label }}">{{ form.industry.label }}</label>
+            <select name="{{ form.industry.name }}" class="form-control" id="{{ form.industry.id_for_label }}">
+                {% for pk, choice in form.industry.field.widget.choices %}
+                    <option name="{{ form.industry.label }}" {% if choice == company.industry %}selected{% endif %}
+                            value="{{ pk }}">
+                        {{ choice }}
+                    </option>
+                {% endfor %}
+            </select>
+            <div class="{% if form.industry.errors %} invalid{% endif %}">
+                {% for error in form.industry.errors %}
+                    <p class="help-block text-danger">*{{ error }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="{{ form.technologies.id_for_label }}">{{ form.technologies.label }}</label>
+            <div class="col-12 col-md-12">
+                <div class="row">
+                    <ul class="list-unstyled row">
+                        {% for pk, choice in form.technologies.field.widget.choices %}
+                            <li class="list-group-item col-12 col-md-6 border-0">
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label" for="id_technologies_{{ forloop.counter0 }}">
+                                        <input name="{{ form.technologies.name }}" class="form-check-input"
+                                               type="checkbox"
+                                               id="id_technologies_{{ forloop.counter0 }}"
+                                               {% if choice in technologies %}checked{% endif %}
+                                               value="{{ pk }}"> {{ choice }}
+                                        <span class="form-check-sign"></span>
+                                    </label>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="{% if form.technologies.errors %} invalid{% endif %}">
+                {% for error in form.technologies.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <label for="{{ form.technologies.id_for_label }}">{{ form.technologies.label }}
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="{{ form.established_year.id_for_label }}">{{ form.established_year.label }}</label>
+            {% render_field form.established_year class="form-control" %}
+            <div class="{% if form.established_year.errors %} invalid{% endif %}">
+                {% for error in form.established_year.errors %}
+                    <p class="help-block">{{ error }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="{{ form.description.id_for_label }}">{{ form.description.label }}</label>
+            <textarea name="{{ form.description.name }}" cols="{{ form.description.widget.attrs.cols }}"
+                      rows="{{ form.description.widget.attrs.cols }}"
+                      style="resize: none" class="form-control"
+                      id="{{ form.description.id_for_label }}"
+                    {% if not company.description %}
+                      placeholder="{{ form.description.label }}"
+                    {% endif %}>{{ company.description }}</textarea>
+            <div class="{% if form.description.errors %}invalid{% endif %}">
+                {% for error in form.description.errors %}
+                    <p class="help-block">{{ error }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="{{ form.company_size.id_for_label }}">{{ form.company_size.label }}</label>
+            <select name="{{ form.company_size.name }}" class="form-control" id="{{ form.company_size.id_for_label }}">
+                {% for pk, choice in form.company_size.field.widget.choices %}
+                    <option value="{{ choice }}"
+                            {% if choice == company.company_size %}selected{% endif %}>{{ choice }}</option>
+                {% endfor %}
+            </select>
+            <div class="{% if form.company_size.errors %}invalid{% endif %}">
+                {% for error in form.company_size.errors %}
+                    <p class="help-block">{{ error }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="{{ form.location.id_for_label }}">{{ form.location.label }}</label>
+            <input class="form-control" type="text" name="{{ form.location.name }}" maxlength="{{ form.fields.location.max_length }}" id="{{ form.location.id_for_label }}"
+                    {% if not company.location %} placeholder="{{ form.location.label }}" {% else %} value="{{ company.location }}" {% endif %}>
+            <div class="{% if form.location.errors %}invalid{% endif %}">
+                {% for error in form.location.errors %}
+                    <p class="help-block">{{ error }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="{{ form.url.id_for_label }}">{{ form.url.label }}</label>
+            <input class="form-control" type="url" name="{{ form.url.name }}"
+                   maxlength="{{ form.url.field.max_length }}"
+                    {% if company.url %}
+                   value="{{ company.url }}" {% else %}placeholder="{{ form.url.label }}{% endif %}">
+            <div class="{% if form.url.errors %}invalid{% endif %}">
+                {% for error in form.url.errors %}
+                    <p class="help-block">{{ error }}</p>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-
     <div class="modal-footer">
         <button type="button" class="submit-btn btn btn-primary">Update</button>
     </div>

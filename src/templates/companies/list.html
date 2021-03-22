@@ -143,7 +143,7 @@
                                     <td>{{ company.industry }}</td>
                                     <td>{% for technology in  company.technologies.all %}
                                         {% if forloop.last %}
-                                            {{ technology }}.
+                                            {{ technology }}
                                         {% else %}
                                             {{ technology }},
                                         {% endif %}
@@ -151,7 +151,7 @@
                                         N/A
                                     {% endfor %}
                                     </td>
-                                    <td>{{ company.location }}</td>
+                                    <td>{% if company.location %}{{ company.location }}{% else %}No location selected{% endif %}</td>
                                     <td>
                                         <button type="button" id="read-company" class="bs-modal btn btn-sm btn-primary"
                                                 data-form-url="{% url 'company_read' company.pk %}">

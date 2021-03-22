@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'bootstrap_modal_forms',
     'smart_selects',
     'companies',
@@ -44,7 +45,12 @@ INSTALLED_APPS = [
     'applications',
     'authentication',
     'widget_tweaks',
-    'chartjs'
+    'chartjs',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
 ]
 
 MIDDLEWARE = [
@@ -55,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'authentication.login_middleware.login_required_middleware'
 ]
 
 ROOT_URLCONF = 'CVmanager.urls'
@@ -136,3 +143,24 @@ STATICFILES_FINDERS = (
 )
 
 JQUERY_URL = True
+
+LOGIN_URL = '/authentication/login/'
+LOGIN_EXEMPT_URLS = ['/authentication/login/', '/authentication/register/']
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+)
+
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email'
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online'
+        }
+    }
+}

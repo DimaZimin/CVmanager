@@ -15,11 +15,10 @@
                 {{ error }}
             {% endfor %}
         </div>
-
-        {% for field in form %}
+        {% for field in form.visible_fields %}
             <div class="form-group">
                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                {% render_field field class="form-control" placeholder=field.label %}
+                {% render_field field class="form-control" placeholder=technology %}
                 <div class="{% if field.errors %} invalid{% endif %}">
                     {% for error in field.errors %}
                         <p class="help-block">{{ error }}</p>
@@ -27,8 +26,18 @@
                 </div>
             </div>
         {% endfor %}
+        {% for hidden in form.hidden_fields %}
+            <div class="form-group">
+                <label for="{{ hidden.id_for_label }}" hidden>{{ hidden.label }}</label>
+                {% render_field hidden class="form-control" %}
+                <div class="{% if hidden.errors %} invalid{% endif %}">
+                    {% for error in hidden.errors %}
+                        <p class="help-block">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
     </div>
-
     <div class="modal-footer">
         <button type="button" class="submit-btn btn btn-primary">Update</button>
     </div>

@@ -13,6 +13,18 @@
                 {{ error }}
             {% endfor %}
         </div>
+        {% for field in form.hidden_fields %}
+            <div class="form-group">
+                <div class="{% if field.errors %} invalid{% endif %}">
+                    {% for error in field.errors %}
+                        <p class="text-danger">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <label for="{{ field.id_for_label }}" hidden>{{ field.label }}
+                </label>
+                {% render_field field class="form-control" %}
+            </div>
+        {% endfor %}
         <div class="form-group">
             <div class="{% if form.date.errors %} invalid{% endif %}">
                 {% for error in form.date.errors %}
@@ -63,7 +75,6 @@
             </label>
             {% render_field form.status class="form-control" placeholder=form.status.label %}
         </div>
-
     </div>
     <div class="modal-footer">
         <button type="button" class="submit-btn btn btn-primary">Create</button>

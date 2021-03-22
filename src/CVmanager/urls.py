@@ -24,8 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('applications/', include('applications.urls')),
     path('companies/', include('companies.urls')),
-    path('login/', include('authentication.urls')),
+    path('authentication/', include('authentication.urls')),
     path('', dashboard, name='dashboard'),
     path('dashboard/', include('dashboard.urls')),
-    # path('chartJSON', ChartJSONView.as_view(), name='pie_chart')
+    path('accounts/', include('allauth.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

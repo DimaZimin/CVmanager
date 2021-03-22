@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from bootstrap_modal_forms.generic import BSModalCreateView, BSModalDeleteView, BSModalReadView, BSModalUpdateView
 from django.urls import reverse_lazy
@@ -6,8 +7,9 @@ from applications.forms import ApplicationForm
 from applications.models import Application
 
 
+@login_required
 def application_list(request):
-    applications = Application.objects.all()
+    applications = Application.objects.all().filter(user=request.user)
     return render(request, 'applications/list.html', {"applications": applications})
 
 

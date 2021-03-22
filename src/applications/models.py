@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from companies.models import Company
@@ -12,7 +13,7 @@ class Application(models.Model):
         PASSED = 'PASSED', _('Interview passed'),
         FAILED = 'FAILED', _('Interview failed'),
         OFFERED = 'OFFERED', _('Job offer received')
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField()
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
     position = models.CharField(max_length=200)
@@ -26,5 +27,6 @@ class Application(models.Model):
 
 class Resume(models.Model):
     name = models.CharField(max_length=255)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     position = models.CharField(max_length=200)
     file = models.FileField(upload_to='resume')
