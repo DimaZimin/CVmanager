@@ -2,18 +2,15 @@ from allauth.account.models import EmailAddress
 from allauth.exceptions import ImmediateHttpResponse
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from allauth.socialaccount.models import SocialAccount
-from bootstrap_modal_forms.generic import BSModalDeleteView
 from django.contrib import messages
 from django.contrib.auth import authenticate, logout, login, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
-from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
@@ -113,10 +110,6 @@ def activate(request, uidb64, token):
         return HttpResponse('Activation link is invalid')
 
 
-def reset_password(request, uudb64, token):
-    pass
-
-
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -132,12 +125,6 @@ def change_password(request):
     return render(request, 'authentication/change_password.html', {
         "form": form
     })
-
-
-class DeleteAccountView(BSModalDeleteView, LoginRequiredMixin):
-    model = User
-    template_name = 'authentication/delete_profile.html'
-    success_url = reverse_lazy('authentication_login')
 
 
 def delete_account(request):
@@ -156,6 +143,7 @@ def delete_account(request):
         except SocialAccount.DoesNotExist:
             pass
         logout(request)
+        messages.success(request, 'Your account has been deleted.')
         return redirect('authentication_login')
     else:
         return render(request, 'authentication/delete_profile.html')
