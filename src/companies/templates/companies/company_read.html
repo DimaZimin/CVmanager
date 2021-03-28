@@ -7,15 +7,15 @@
 </div>
 <div class="modal-body">
     <div class="">
-        <p>Company: {{ company.name }}</p>
+        <p><strong>Company: </strong>{{ company.name }}</p>
     </div>
     {% if company.industry %}
         <div class="">
-            <p>Industry: {{ company.industry }}</p>
+            <p><strong> Industry: </strong>{{ company.industry }}</p>
         </div>
     {% endif %}
     <div class="">
-        <p>Technologies:
+        <p><strong>Technologies:</strong>
             {% for technology in  company.technologies.all %}
                 {% if forloop.last %}
                     {{ technology }}.
@@ -28,27 +28,27 @@
     </div>
     {% if company.established_year %}
         <div class="">
-            <p>Established year: {{ company.established_year }}</p>
+            <p><strong>Established year: </strong>{{ company.established_year }}</p>
         </div>
     {% endif %}
     {% if company.description %}
         <div class="">
-            <p>Description: {{ company.description }}</p>
+            <p><strong>Description: </strong>{{ company.description }}</p>
         </div>
     {% endif %}
     {% if company.comany_size %}
         <div class="">
-            <p>Company size: {{ company.comany_size }}</p>
+            <p><strong>Company size: </strong>{{ company.comany_size }}</p>
         </div>
     {% endif %}
     {% if company.location %}
         <div class="">
-            <p>Location: {{ company.location }}</p>
+            <p><strong>Location: </strong>{{ company.location }}</p>
         </div>
     {% endif %}
     {% if company.url %}
         <div class="">
-            <p>url: <a href="{{ company.url }}">{{ company.url }}</a></p>
+            <p>URL: <a href="{{ company.url }}">{{ company.url }}</a></p>
         </div>
     {% endif %}
 </div>

@@ -11,7 +11,7 @@
     <link rel="icon" type="image/png" href="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>
-        Employment manager
+        HiReHi.com | your employment history
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
@@ -28,16 +28,16 @@
 <div class="wrapper wrapper-full-page">
     <div class="sidebar" data-color="white" data-active-color="danger">
         <div class="logo">
-        <a href="https://www.creative-tim.com" class="simple-text logo-mini">
-          <div class="logo-image-big">
-            <img src="{% static 'assets/img/logo-small.png'  %}">
-          </div>
-          <!-- <p>CT</p> -->
-        </a>
-        <a href="https://www.creative-tim.com" class="simple-text logo-normal">
-          HireHi
-        </a>
-      </div>
+            <a href="" class="simple-text logo-mini">
+                <div class="logo-image-big">
+                    <img src="{% static 'assets/img/logo-small.png' %}">
+                </div>
+                <!-- <p>CT</p> -->
+            </a>
+            <a href="" class="simple-text logo-normal">
+                HireHi
+            </a>
+        </div>
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li class={% if request.path == dashboard_view %}"active"{% else %}{% endif %}>
@@ -125,6 +125,20 @@
                     </div>
                 </div>
                 {#    MODAL END #}
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags %}
+                            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show"
+                                 role="alert">
+                                <button type="button" aria-hidden="true" class="close" data-dismiss="alert"
+                                        aria-label="Close">
+                                    <i class="nc-icon nc-simple-remove"></i>
+                                </button>
+                                <span><b>{{ message.tags|capfirst }}:</b> {{ message }}</span>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
                 {% block content %}
                 {% endblock %}
             </div>
@@ -169,6 +183,11 @@
             });
         });
     });
+    window.setTimeout(function () {
+        $(".alert").fadeTo(700, 0).slideUp(700, function () {
+            $(this).remove();
+        });
+    }, 1500)
 </script>
 {% block javascript %}
 {% endblock javascript %}

@@ -17,7 +17,7 @@ class ApplicationCreateView(BSModalCreateView):
     model = Application
     template_name = 'applications/application_create.html'
     form_class = ApplicationForm
-    success_message = 'Success: created!'
+    success_message = 'Success! Application has been registered.'
     success_url = reverse_lazy('applications_list')
 
 
@@ -25,14 +25,14 @@ class ApplicationUpdateView(BSModalUpdateView):
     model = Application
     template_name = 'applications/application_update.html'
     form_class = ApplicationForm
-    success_message = 'Success: updated!'
+    success_message = 'Success! Application has been updated.'
     success_url = reverse_lazy('applications_list')
 
 
 class ApplicationDeleteView(BSModalDeleteView):
     model = Application
     template_name = 'applications/application_delete.html'
-    success_message = 'Success: deleted!'
+    success_message = 'Success! Application has been deleted.'
     success_url = reverse_lazy('applications_list')
 
 
