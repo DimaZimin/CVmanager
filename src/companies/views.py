@@ -28,52 +28,33 @@ def company_list(request):
     )
 
 
-@method_decorator(login_required, name='dispatch')
 class TechnologyCreateView(BSModalCreateView, LoginRequiredMixin):
     template_name = 'companies/content/technology_create.html'
     form_class = TechnologyForm
-    success_message = 'Success: created!'
+    success_message = 'Success! Technology has been created.'
     success_url = reverse_lazy('companies_list')
 
 
-@method_decorator(login_required, name='dispatch')
 class TechnologyUpdateView(BSModalUpdateView, LoginRequiredMixin):
     model = Technology
     template_name = 'companies/content/technology_update.html'
     form_class = TechnologyForm
-    success_message = 'Success: updated!'
+    success_message = 'Success! Technology has been updated.'
     success_url = reverse_lazy('companies_list')
 
 
-@method_decorator(login_required, name='dispatch')
 class TechnologyDeleteView(BSModalDeleteView, LoginRequiredMixin):
     model = Technology
     template_name = 'companies/content/technology_delete.html'
-    success_message = 'Success: deleted!'
+    success_message = 'Success! Technology has been deleted'
     success_url = reverse_lazy('companies_list')
 
 
 class IndustryCreateView(BSModalCreateView, LoginRequiredMixin):
     template_name = 'companies/content/industry_create.html'
     form_class = IndustryForm
-    success_message = 'Success: created!'
+    success_message = 'Success! Industry has been created.'
     success_url = reverse_lazy('companies_list')
-
-    # def get_form_kwargs(self):
-    #     user = self.request.user
-    #     form_kwargs = super(IndustryCreateView, self).get_form_kwargs()
-    #     print(form_kwargs)
-    #     return form_kwargs
-    #
-    def post(self, request, *args, **kwargs):
-        instance = super(IndustryCreateView, self).post(request, *args, **kwargs)
-        print(request.POST)
-        return instance
-    #
-    # def get_context_data(self, **kwargs):
-    #     instance = super(IndustryCreateView, self).get_context_data(**kwargs)
-    #     print('\n\n\nDEBUG', instance['form'].errors)
-    #     return instance
 
 
 class IndustryUpdateView(BSModalUpdateView, LoginRequiredMixin):
@@ -115,7 +96,7 @@ class CompanyUpdateView(BSModalUpdateView, LoginRequiredMixin):
 class CompanyDeleteView(BSModalDeleteView, LoginRequiredMixin):
     model = Company
     template_name = 'companies/company_delete.html'
-    success_message = 'Success: deleted!'
+    success_message = 'Success: Company has been deleted.'
     success_url = reverse_lazy('companies_list')
 
 

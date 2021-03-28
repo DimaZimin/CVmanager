@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+import dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -170,7 +171,7 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'dmytrozim@gmail.com'
-EMAIL_HOST_PASSWORD = 'acxpkltixftnpbqk'
+EMAIL_HOST = dotenv.dotenv_values().get('EMAIL_HOST')
+EMAIL_HOST_USER = dotenv.dotenv_values().get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = dotenv.dotenv_values().get('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
