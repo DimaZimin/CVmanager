@@ -40,6 +40,16 @@ class ApplicationForm(BSModalModelForm):
         )
     )
 
+    description = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                "rows": 4,
+                "style": "resize: none;"
+            }
+        ),
+        required=False
+    )
+
     class Meta:
         model = Application
         fields = {
@@ -48,5 +58,6 @@ class ApplicationForm(BSModalModelForm):
             "company",
             "position",
             "portal",
-            "status"
+            "status",
+            "description"
         }

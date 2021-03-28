@@ -76,8 +76,6 @@
                     <p class="text-danger">{{ error }}</p>
                 {% endfor %}
             </div>
-            <label for="{{ form.technologies.id_for_label }}">{{ form.technologies.label }}
-            </label>
         </div>
         <div class="form-group">
             <label for="{{ form.established_year.id_for_label }}">{{ form.established_year.label }}</label>
@@ -127,7 +125,7 @@
         </div>
         <div class="form-group">
             <label for="{{ form.url.id_for_label }}">{{ form.url.label }}</label>
-            <input class="form-control" type="url" name="{{ form.url.name }}"
+            <input id="{{ form.url.id_for_label }}" class="form-control" type="url" name="{{ form.url.name }}"
                    maxlength="{{ form.url.field.max_length }}"
                    placeholder="{{ form.url.label }}">
             <div class="{% if form.url.errors %}invalid{% endif %}">
@@ -138,6 +136,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="submit-btn btn btn-primary">Create</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="submit-btn btn btn-primary">Create</button>
     </div>
 </form>

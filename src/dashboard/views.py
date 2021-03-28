@@ -27,7 +27,7 @@ def dashboard(request):
     total_applications = applications.count()
     technologies = [str(tech) for tech in itertools.chain(*[list(app.company.technologies.all()) for app in applications])]
     technologies_counted = Counter(technologies)
-    locations = [app.company.location for app in applications]
+    locations = [app.company.location if app.company.location else 'Other' for app in applications]
     locations_counted = Counter(locations)
     locations_data = [number for number in locations_counted.values()]
     locations_percentage = [

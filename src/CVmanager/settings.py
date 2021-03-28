@@ -39,17 +39,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'bootstrap_modal_forms',
-    'smart_selects',
-    'companies',
-    'dashboard',
-    'applications',
-    'authentication',
     'widget_tweaks',
     'chartjs',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'smart_selects',
+    'companies',
+    'dashboard',
+    'applications',
+    'authentication',
 
 ]
 
@@ -69,8 +69,7 @@ ROOT_URLCONF = 'CVmanager.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [os.path.join(BASE_DIR / 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,6 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'authentication.context_processors.is_social'
             ],
         },
     },
@@ -134,9 +134,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
+STATICFILES_DIRS = [
   os.path.join(BASE_DIR, 'static'),
-)
+]
+
+
 STATICFILES_FINDERS = (
   'django.contrib.staticfiles.finders.FileSystemFinder',
   'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -151,6 +153,8 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend'
 )
 
+SOCIALACCOUNT_ADAPTER = 'authentication.views.MyAdapter'
+
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 SOCIALACCOUNT_PROVIDERS = {
@@ -164,3 +168,9 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'dmytrozim@gmail.com'
+EMAIL_HOST_PASSWORD = 'acxpkltixftnpbqk'
+EMAIL_PORT = 587

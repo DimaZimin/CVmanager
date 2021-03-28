@@ -1,0 +1,38 @@
+{% extends 'base_no_menu.html' %}
+{% load widget_tweaks %}
+{% block content %}
+    <div class="container h-100">
+        <div class="row align-items-center h-100">
+            <div class="col-12 col-sm-8 col-md-6 mx-auto">
+                <div class="card h-100 justify-content-center">
+                    <div class="card-header header-title text-center">
+                        <h4>
+                            Reset password
+                        </h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="col-12 col-sm-8 col-md-10 mx-auto">
+                            <form name="register" id="register" method="post">
+                                {% csrf_token %}
+                                {% for field in form %}
+                                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                    {% render_field field class="form-control" %}
+                                {% endfor %}
+                            </form>
+                            <div class="form-group">
+                                <div class="ml-auto mr-auto">
+                                    <button type="submit" form="register" class="btn btn-primary btn-round">
+                                        Reset
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-footer ml-auto mr-auto">
+                                <p><a href="">Hirehi.com</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

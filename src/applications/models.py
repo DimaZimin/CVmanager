@@ -15,10 +15,11 @@ class Application(models.Model):
         OFFERED = 'OFFERED', _('Job offer received')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField()
-    company = models.ForeignKey(Company, on_delete=models.PROTECT)
-    position = models.CharField(max_length=200)
-    portal = models.CharField(max_length=200)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    position = models.CharField(max_length=200, null=True, blank=True)
+    portal = models.CharField(max_length=200, null=True, blank=True)
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.APPLIED)
+    description = models.TextField(max_length=2000, null=True, blank=True)
 
     @classmethod
     def get_statuses(cls):

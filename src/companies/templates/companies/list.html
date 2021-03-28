@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-    {#    MODAL #}
-    <div class="modal fade" tabindex="-1" role="dialog" id="modal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content"></div>
-        </div>
-    </div>
-    <div class="modal fade" id="create-modal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content"></div>
-        </div>
-    </div>
-    {#    MODAL END #}
+    {% if messages %}
+            {% for message in messages %}
+                {% if message.tags %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                            <i class="nc-icon nc-simple-remove"></i>
+                        </button>
+                        <span><b>{{ message.tag }}</b>{{ message }}</span>
+                    </div>
+                {% endif %}
+            {% endfor %}
+    {% endif %}
     <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="collapse" id="collapseTechnologies">
                     <div class="card-body">
-                        <table class="table table-striped table-hover table-responsive"
+                        <table class="table table-striped"
                                id="technology-table">
                             <thead>
                             <tr>
@@ -46,12 +46,12 @@
                                     <td class="col-2">
                                         <div class="row">
                                             <button type="button" id="technology-update"
-                                                    class="bs-modal btn btn-sm btn-primary"
+                                                    class="bs-modal btn btn-sm btn-primary technology-update"
                                                     data-form-url="{% url 'technology_update' technology.id %}">
                                                 <span class="fa fa-pencil"></span>
                                             </button>&nbsp;
                                             <button type="button" id="technology-delete"
-                                                    class="btn btn-danger btn-sm bs-modal"
+                                                    class="btn btn-danger btn-sm bs-modal technology-delete"
                                                     data-form-url="{% url 'technology_delete' technology.id %}"><i
                                                     class="fa fa-trash-o"></i></button>
                                         </div>
@@ -80,7 +80,7 @@
                 </div>
                 <div class="collapse" id="collapseIndustries">
                     <div class="card-body">
-                        <table class="table table-striped table-hover table-responsive" id="industries">
+                        <table class="table table-striped" id="industries">
                             <thead>
                             <tr>
                                 <th class="col-lg-10">Name</th>
@@ -93,13 +93,13 @@
                                     <td>{{ industry.name }}</td>
                                     <td>
                                         <div class="row">
-                                            <button type="button" id="industry-update"
-                                                    class="bs-modal btn btn-sm btn-primary"
+                                            <button type="button"
+                                                    class="bs-modal btn btn-sm btn-primary industry-update"
                                                     data-form-url="{% url 'industry_update' industry.id %}">
                                                 <span class="fa fa-pencil"></span>
                                             </button>&nbsp;
-                                            <button type="button" id="industry-delete"
-                                                    class="btn btn-danger btn-sm bs-modal"
+                                            <button type="button"
+                                                    class="btn btn-danger btn-sm bs-modal industry-delete"
                                                     data-form-url="{% url 'industry_delete' industry.id %}">
                                                 <span class="fa fa-trash-o"></span>
                                             </button>
@@ -151,18 +151,19 @@
                                         N/A
                                     {% endfor %}
                                     </td>
-                                    <td>{% if company.location %}{{ company.location }}{% else %}No location selected{% endif %}</td>
+                                    <td>{% if company.location %}{{ company.location }}{% else %}No location
+                                        selected{% endif %}</td>
                                     <td>
-                                        <button type="button" id="read-company" class="bs-modal btn btn-sm btn-primary"
+                                        <button type="button" class="bs-modal btn btn-sm btn-primary company-read"
                                                 data-form-url="{% url 'company_read' company.pk %}">
                                             <span class="fa fa-eye"></span>
                                         </button>
-                                        <button type="button" id="company-update"
-                                                class="bs-modal btn btn-sm btn-primary"
+                                        <button type="button"
+                                                class="bs-modal btn btn-sm btn-primary company-update"
                                                 data-form-url="{% url 'company_update' company.id %}">
                                             <span class="fa fa-pencil"></span>
                                         </button>
-                                        <button type="button" id="company-delete" class="btn btn-danger btn-sm bs-modal"
+                                        <button type="button" class="btn btn-danger btn-sm bs-modal company-delete"
                                                 data-form-url="{% url 'company_delete' company.id %}">
                                             <span class="fa fa-trash-o"></span>
                                         </button>
@@ -185,9 +186,50 @@
 {% block javascript %}
     <script type="text/javascript">
         $(function () {
-            $(".bs-modal").each(function () {
+            $(".industry-update").each(function () {
                 $(this).modalForm({
-                    formURL: $(this).data('form-url')
+                    formURL: $(this).data('form-url'),
+                });
+            });
+            $(".industry-delete").each(function () {
+                $(this).modalForm({
+                    formURL: $(this).data('form-url'),
+                    isDeleteForm: true
+                });
+            });
+            $("#industry-create").modalForm({
+                formURL: "{% url 'industry_create' %}",
+                modalID: "#create-modal"
+            });
+            $(".technology-update").each(function () {
+                $(this).modalForm({
+                    formURL: $(this).data('form-url'),
+                });
+            });
+            $(".technology-delete").each(function () {
+                $(this).modalForm({
+                    formURL: $(this).data('form-url'),
+                    isDeleteForm: true
+                });
+            });
+            $("#technology-create").modalForm({
+                formURL: "{% url 'technology_create' %}",
+                modalID: "#create-modal"
+            });
+            $(".company-update").each(function () {
+                $(this).modalForm({
+                    formURL: $(this).data('form-url'),
+                });
+            });
+            $(".company-delete").each(function () {
+                $(this).modalForm({
+                    formURL: $(this).data('form-url'),
+                    isDeleteForm: true
+                });
+            });
+            $(".company-read").each(function () {
+                $(this).modalForm({
+                    formURL: $(this).data('form-url'),
                 });
             });
             $("#company-create").modalForm({
@@ -195,31 +237,10 @@
                 modalID: "#create-modal"
             });
         });
-    </script>
-    <script type="text/javascript">
-        $(function () {
-            $(".bs-modal").each(function () {
-                $(this).modalForm({
-                    formURL: $(this).data('form-url')
-                });
+        window.setTimeout(function () {
+            $(".alert").fadeTo(700, 0).slideUp(700, function () {
+                $(this).remove();
             });
-            $("#technology-create").modalForm({
-                formURL: "{% url 'technology_create' %}",
-                modalID: "#create-modal"
-            });
-        });
-    </script>
-    <script type="text/javascript">
-        $(function () {
-            $(".bs-modal").each(function () {
-                $(this).modalForm({
-                    formURL: $(this).data('form-url')
-                });
-            });
-            $("#industry-create").modalForm({
-                formURL: "{% url 'industry_create' %}",
-                modalID: "#create-modal"
-            });
-        });
+        }, 1500)
     </script>
 {% endblock javascript %}

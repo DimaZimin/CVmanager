@@ -119,8 +119,10 @@
         </div>
         <div class="form-group">
             <label for="{{ form.location.id_for_label }}">{{ form.location.label }}</label>
-            <input class="form-control" type="text" name="{{ form.location.name }}" maxlength="{{ form.fields.location.max_length }}" id="{{ form.location.id_for_label }}"
-                    {% if not company.location %} placeholder="{{ form.location.label }}" {% else %} value="{{ company.location }}" {% endif %}>
+            <input class="form-control" type="text" name="{{ form.location.name }}"
+                   maxlength="{{ form.fields.location.max_length }}" id="{{ form.location.id_for_label }}"
+                    {% if not company.location %} placeholder="{{ form.location.label }}" {% else %}
+                   value="{{ company.location }}" {% endif %}>
             <div class="{% if form.location.errors %}invalid{% endif %}">
                 {% for error in form.location.errors %}
                     <p class="help-block">{{ error }}</p>
@@ -141,6 +143,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="submit-btn btn btn-primary">Update</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="submit-btn btn btn-primary">Update</button>
     </div>
 </form>

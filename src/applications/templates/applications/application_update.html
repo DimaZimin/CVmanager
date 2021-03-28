@@ -47,7 +47,8 @@
             </label>
             <select name="{{ form.company.name }}" class="form-control" required id="{{ form.company.id_for_label }}">
                 {% for pk, choice in form.company.field.widget.choices %}
-                    <option value="{{ pk }}" {% if choice == application.company.name %}selected{% endif %}>{{ choice }}</option>
+                    <option value="{{ pk }}"
+                            {% if choice == application.company.name %}selected{% endif %}>{{ choice }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -59,7 +60,11 @@
             </div>
             <label for="{{ form.position.id_for_label }}">{{ form.position.label }}
             </label>
-            <input class="form-control" value="{{ application.position }}" id="{{ form.position.id_for_label }}"
+            <input class="form-control"
+                   {% if application.position %}value="{{ application.position }}" {% else %}
+                   placeholder="{{ form.position.label }}"
+                   {% endif %}
+                   id="{{ form.position.id_for_label }}"
                    type="text" name="{{ form.position.name }}" maxlength="{{ form.position.fields.attrs.max_length }}"
                    required>
         </div>
@@ -71,7 +76,9 @@
             </div>
             <label for="{{ form.portal.id_for_label }}">{{ form.portal.label }}
             </label>
-            <input class="form-control" value="{{ application.portal }}" id="{{ form.portal.id_for_label }}" type="text"
+            <input class="form-control" {% if application.portal %}value="{{ application.portal }}" {% else %}
+                   placeholder="{{ form.portal.label }}"
+            {% endif %} id="{{ form.portal.id_for_label }}" type="text"
                    name="{{ form.portal.name }}" maxlength="{{ form.portal.fields.attrs.max_length }}">
         </div>
         <div class="form-group">
@@ -84,12 +91,29 @@
             </label>
             <select name="{{ form.status.name }}" class="form-control" id="{{ form.status.id_for_label }}">
                 {% for enum, choice in form.status.field.widget.choices %}
-                    <option value="{{ enum }}" {% if enum == application.status %} selected{% endif %}>{{ choice }}</option>
+                    <option value="{{ enum }}" {% if enum == application.status %}
+                            selected{% endif %}>{{ choice }}</option>
                 {% endfor %}
             </select>
         </div>
+        <div class="form-group">
+            <label for="{{ form.description.id_for_label }}">{{ form.description.label }}</label>
+            <textarea name="{{ form.description.name }}" cols="{{ form.description.widget.attrs.cols }}"
+                      rows="{{ form.description.widget.attrs.cols }}"
+                      style="resize: none" class="form-control"
+                      id="{{ form.description.id_for_label }}"
+                    {% if not applications.description %}
+                      placeholder="{{ form.description.label }}"
+                    {% endif %}>{{ applications.description }}</textarea>
+            <div class="{% if form.description.errors %}invalid{% endif %}">
+                {% for error in form.description.errors %}
+                    <p class="help-block">{{ error }}</p>
+                {% endfor %}
+            </div>
+        </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="submit-btn btn btn-primary">Update</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="submit-btn btn btn-primary">Update</button>
     </div>
 </form>

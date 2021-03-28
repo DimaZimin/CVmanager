@@ -18,7 +18,7 @@
         {% for field in form.visible_fields %}
             <div class="form-group">
                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                {% render_field field class="form-control" placeholder=technology %}
+                {% render_field field class="form-control" value=technology.name %}
                 <div class="{% if field.errors %} invalid{% endif %}">
                     {% for error in field.errors %}
                         <p class="help-block">{{ error }}</p>
@@ -39,7 +39,8 @@
         {% endfor %}
     </div>
     <div class="modal-footer">
-        <button type="button" class="submit-btn btn btn-primary">Update</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="submit-btn btn btn-primary">Update</button>
     </div>
 
 </form>

@@ -1,0 +1,26 @@
+{% extends 'base_no_menu.html' %}
+{% block content %}
+    <div class="container h-100">
+        <div class="row align-items-center h-100">
+            <div class="col-12 col-sm-8 col-md-6 mx-auto">
+                <div class="card h-100 justify-content-center">
+                    <div class="card-header header-title text-center">
+                        <h4>
+                            Confirm registration.
+                        </h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <p>
+                            Thank you for registering at our service, {{ user }}.
+                            Activation link has been sent to e-mail address: {{ email }}
+                            Please, activate your account by clicking on link.
+                        </p>
+                        <div class="card-footer ml-auto mr-auto">
+                            <p><a href="">MyHire.com</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

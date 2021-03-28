@@ -57,6 +57,8 @@ class UserRegistrationForm(UserCreationForm):
         email = self.cleaned_data.get('email')
         try:
             match = User.objects.get(email=email)
+            if not match.is_active:
+                return email
         except User.DoesNotExist:
             return email
         raise forms.ValidationError('This email is already in use.')
