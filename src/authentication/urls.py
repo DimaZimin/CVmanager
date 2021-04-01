@@ -11,7 +11,10 @@ urlpatterns = [
     url(r'^password/$', views.change_password, name='authentication_change_password'),
     url(r'^delete_profile/$', views.delete_account, name='authentication_delete_profile'),
     url(r'^pasword_reset/$', auth_views.PasswordResetView.as_view(
-        template_name="authentication/password_reset/reset_form.html"),
+        template_name="authentication/password_reset/reset_form.html",
+        email_template_name='authentication/password_reset/email.html',
+
+        ),
         name='password_reset'),
     url(r'^password_reset/done/$', auth_views.PasswordResetDoneView.as_view(
         template_name="authentication/password_reset/done.html"
