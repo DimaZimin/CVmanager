@@ -2,7 +2,7 @@
 Available on the web at https://www.hirehiapp.space/
 
 Tech stack:
-Django, Bootsrap, Javascript
+Django, Bootstrap 4, Javascript
 
 
 This app allows you to track your job application history easily. 
