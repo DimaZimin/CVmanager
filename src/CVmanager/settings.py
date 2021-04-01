@@ -95,7 +95,7 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'hiremanager',
+        'NAME': env('POSTGRES_DB'),
         'USER': env('POSTGRES_USER'),
         'PASSWORD': env('POSTGRES_PASSWORD')
     }
@@ -141,11 +141,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # if not DEBUG:
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # else:
-STATICFILES_DIRS = [
-  os.path.join(BASE_DIR, 'static'),
-]
+# STATICFILES_DIRS = [
+#  os.path.join(BASE_DIR, 'static'),
+# ]
 
 STATICFILES_FINDERS = (
   'django.contrib.staticfiles.finders.FileSystemFinder',
