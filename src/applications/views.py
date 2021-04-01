@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 
 from applications.forms import ApplicationForm
 from applications.models import Application
+from django.utils.decorators import method_decorator
 
 
 @login_required
@@ -13,6 +14,7 @@ def application_list(request):
     return render(request, 'applications/list.html', {"applications": applications})
 
 
+@method_decorator(login_required, name='dispatch')
 class ApplicationCreateView(BSModalCreateView):
     model = Application
     template_name = 'applications/application_create.html'
@@ -21,6 +23,7 @@ class ApplicationCreateView(BSModalCreateView):
     success_url = reverse_lazy('applications_list')
 
 
+@method_decorator(login_required, name='dispatch')
 class ApplicationUpdateView(BSModalUpdateView):
     model = Application
     template_name = 'applications/application_update.html'
@@ -29,6 +32,7 @@ class ApplicationUpdateView(BSModalUpdateView):
     success_url = reverse_lazy('applications_list')
 
 
+@method_decorator(login_required, name='dispatch')
 class ApplicationDeleteView(BSModalDeleteView):
     model = Application
     template_name = 'applications/application_delete.html'
@@ -36,6 +40,7 @@ class ApplicationDeleteView(BSModalDeleteView):
     success_url = reverse_lazy('applications_list')
 
 
+@method_decorator(login_required, name='dispatch')
 class ApplicationReadView(BSModalReadView):
     model = Application
     template_name = 'applications/application_read.html'

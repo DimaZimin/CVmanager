@@ -28,6 +28,7 @@ def company_list(request):
     )
 
 
+@method_decorator(login_required, name='dispatch')
 class TechnologyCreateView(BSModalCreateView, LoginRequiredMixin):
     template_name = 'companies/content/technology_create.html'
     form_class = TechnologyForm
@@ -35,6 +36,7 @@ class TechnologyCreateView(BSModalCreateView, LoginRequiredMixin):
     success_url = reverse_lazy('companies_list')
 
 
+@method_decorator(login_required, name='dispatch')
 class TechnologyUpdateView(BSModalUpdateView, LoginRequiredMixin):
     model = Technology
     template_name = 'companies/content/technology_update.html'
@@ -43,6 +45,7 @@ class TechnologyUpdateView(BSModalUpdateView, LoginRequiredMixin):
     success_url = reverse_lazy('companies_list')
 
 
+@method_decorator(login_required, name='dispatch')
 class TechnologyDeleteView(BSModalDeleteView, LoginRequiredMixin):
     model = Technology
     template_name = 'companies/content/technology_delete.html'
@@ -50,6 +53,7 @@ class TechnologyDeleteView(BSModalDeleteView, LoginRequiredMixin):
     success_url = reverse_lazy('companies_list')
 
 
+@method_decorator(login_required, name='dispatch')
 class IndustryCreateView(BSModalCreateView, LoginRequiredMixin):
     template_name = 'companies/content/industry_create.html'
     form_class = IndustryForm
@@ -57,6 +61,7 @@ class IndustryCreateView(BSModalCreateView, LoginRequiredMixin):
     success_url = reverse_lazy('companies_list')
 
 
+@method_decorator(login_required, name='dispatch')
 class IndustryUpdateView(BSModalUpdateView, LoginRequiredMixin):
     model = Industry
     template_name = 'companies/content/industry_update.html'
@@ -65,6 +70,7 @@ class IndustryUpdateView(BSModalUpdateView, LoginRequiredMixin):
     success_url = reverse_lazy('companies_list')
 
 
+@method_decorator(login_required, name='dispatch')
 class IndustryDeleteView(BSModalDeleteView, LoginRequiredMixin):
     model = Industry
     template_name = 'companies/content/industry_delete.html'
@@ -72,6 +78,7 @@ class IndustryDeleteView(BSModalDeleteView, LoginRequiredMixin):
     success_url = reverse_lazy('companies_list')
 
 
+@method_decorator(login_required, name='dispatch')
 class CompanyCreateView(BSModalCreateView, LoginRequiredMixin):
     model = Company
     template_name = 'companies/company_create.html'
@@ -80,6 +87,7 @@ class CompanyCreateView(BSModalCreateView, LoginRequiredMixin):
     success_url = reverse_lazy('companies_list')
 
 
+@method_decorator(login_required, name='dispatch')
 class CompanyUpdateView(BSModalUpdateView, LoginRequiredMixin):
     model = Company
     template_name = 'companies/company_update.html'
@@ -93,6 +101,7 @@ class CompanyUpdateView(BSModalUpdateView, LoginRequiredMixin):
         return instance
 
 
+@method_decorator(login_required, name='dispatch')
 class CompanyDeleteView(BSModalDeleteView, LoginRequiredMixin):
     model = Company
     template_name = 'companies/company_delete.html'
@@ -100,6 +109,7 @@ class CompanyDeleteView(BSModalDeleteView, LoginRequiredMixin):
     success_url = reverse_lazy('companies_list')
 
 
+@method_decorator(login_required, name='dispatch')
 class CompanyReadView(BSModalReadView, LoginRequiredMixin):
     model = Company
     template_name = 'companies/company_read.html'

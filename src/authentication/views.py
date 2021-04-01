@@ -4,6 +4,7 @@ from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from allauth.socialaccount.models import SocialAccount
 from django.contrib import messages
 from django.contrib.auth import authenticate, logout, login, update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
@@ -67,7 +68,7 @@ def register_page(request):
             user = form.save(commit=False)
             user.is_active = False
             user.save()
-            current_site = get_current_site(request)
+            # for development use as domain current_site = get_current_site(request)
             mail_subject = 'Activate your account'
             message = render_to_string('authentication/acc_active_email.html', {
                 'user': user,
@@ -111,6 +112,7 @@ def activate(request, uidb64, token):
         return HttpResponse('Activation link is invalid')
 
 
+@login_required
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -128,6 +130,7 @@ def change_password(request):
     })
 
 
+@login_required
 def delete_account(request):
     if request.method == 'POST':
         username = request.user
