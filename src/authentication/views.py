@@ -71,7 +71,7 @@ def register_page(request):
             mail_subject = 'Activate your account'
             message = render_to_string('authentication/acc_active_email.html', {
                 'user': user,
-                'domain': current_site.domain,
+                'domain': request.get_host(),
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user),
             })
