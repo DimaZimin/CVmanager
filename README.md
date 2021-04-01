@@ -14,5 +14,5 @@ How to use it?
 1. Go to the "Companies" tab and add technologies and industries relevant to your prospective job. 
 2. Add potential companies you are going to apply to.
 3. Go to the "Applications" tab and add a record. 
-4. In the dashboard section, you will see your application summary with statistics and colorful charts. 
+4. In the dashboard section, you will see your application summary with statistics and informative charts. 
 
