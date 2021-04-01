@@ -17,11 +17,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+import environ
 
 from dashboard.views import dashboard
 
+env = environ.Env()
+environ.Env.read_env()
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path(f'{env("ADMIN_URL")}/', admin.site.urls),
     path('applications/', include('applications.urls')),
     path('companies/', include('companies.urls')),
     path('authentication/', include('authentication.urls')),

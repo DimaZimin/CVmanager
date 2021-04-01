@@ -29,7 +29,7 @@ class MyAdapter(DefaultSocialAccountAdapter):
         except User.DoesNotExist:
             return ImmediateHttpResponse(redirect('authentication_login'))
         try:
-            email_address = EmailAddress.objects.get(email__iexact=email)
+            email_address = EmailAddress.objects.get(email__iexact=str(email))
             user = email_address.user
             sociallogin.connect(request, user)
         except EmailAddress.DoesNotExist:
@@ -105,6 +105,7 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+        messages.success(request, 'Your account has been activated.')
         return redirect('dashboard')
     else:
         return HttpResponse('Activation link is invalid')
