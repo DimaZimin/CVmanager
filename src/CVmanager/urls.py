@@ -14,12 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
+from django.conf.urls import handler404, handler500
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 import environ
 
 from dashboard.views import dashboard
+
+from . import views
 
 env = environ.Env()
 environ.Env.read_env()
@@ -33,3 +36,6 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
     path('accounts/', include('allauth.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = 'CVmanager.views.error_404'
+handler500 = 'CVmanager.views.error_500'
