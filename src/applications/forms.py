@@ -8,10 +8,6 @@ from applications.models import Application
 from companies.models import Company
 
 
-def max_date_today():
-    return str(datetime.datetime.today().date())
-
-
 class ApplicationForm(BSModalModelForm):
 
     def __init__(self, *args, **kwargs):
@@ -33,7 +29,6 @@ class ApplicationForm(BSModalModelForm):
         label='Date',
         widget=forms.DateInput(
             attrs={
-                "max": max_date_today(),
                 "min": "2020-01-01",
                 "type": "date",
             }
