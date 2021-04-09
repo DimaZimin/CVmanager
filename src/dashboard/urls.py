@@ -3,5 +3,5 @@ from . import views
 
 
 urlpatterns = [
-    # path('chartJSON', views.test_json, name='test_json')
+    path('', views.dashboard, name='dashboard'),
 ]

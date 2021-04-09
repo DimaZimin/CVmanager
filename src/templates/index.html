@@ -1,0 +1,244 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Hirehiapp.space | Your job application history</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/venobox/venobox.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+
+        <h1 class="logo mr-auto">Hirehiapp</h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav class="nav-menu d-none d-lg-block">
+            <ul>
+                {% if not user %}
+                    <li><a href="{% url 'authentication_login' %}" class="get-started-btn scrollto">Login</a></li>
+                    <li><a href="{% url 'authentication_register' %}" class="get-started-btn scrollto">Register</a></li>
+                {% else %}
+                    <li><a href="{% url 'dashboard' %}">Go to profile, {{ user }}</a></li>
+                    <li><a href="{% url 'authentication_logout' %}" class="text-danger">Logout</a></li>
+                {% endif %}
+            </ul>
+        </nav><!-- .nav-menu -->
+    </div>
+</header><!-- End Header -->
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+                <h1>Track your job applications easily</h1>
+                <h2>With hirehiapp, tracking your recruitment history gets more convenient</h2>
+                <div class="d-flex">
+                    <a href="#instruction" class="btn-get-started scrollto">How does it work?</a>
+                </div>
+            </div>
+            <div class="col-lg-6 order-1 order-lg-2 hero-img">
+                <img src="{% static "assets/img/personal_info.svg" %}" class="img-fluid animated" alt="">
+            </div>
+        </div>
+    </div>
+
+</section><!-- End Hero -->
+
+<main id="main">
+    <section class="about">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <img src="{% static 'assets/img/resume.png' %}" class="img-fluid" alt="">
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0 content">
+                    <h3>Are you just starting your career?</h3>
+                    <p class="blockquote font-italic">
+                        "When I was just about to start a career, I sent hundreds of CVs to potential
+                        employers. To keep track of my applications, I needed to make notes each time I send my CV. That
+                        was so inconvenient." -
+                        <span class="font-weight-normal">says Michael Scott, who is now regional manager of "Dunder Mifflin" company.</span>
+                    </p>
+                    <h5>
+                        With Hirehiapp this task becomes much easier!
+                        With Hirehiapp you can track your recruitment process with much more ease.
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 content">
+                    <h3>Features</h3>
+                    <ul>
+                        <li><i class="icofont-check-circled"></i> Easily manage a database of your potential employers
+                        </li>
+                        <li><i class="icofont-check-circled"></i> Keep track of technologies and skills relevant to your
+                            job
+                        </li>
+                        <li><i class="icofont-check-circled"></i> Manage job applications records
+                        </li>
+                        <li><i class="icofont-check-circled"></i> Get an overview of your recruitment process
+                            illustrated by beautiful visualization and colorful charts
+                        </li>
+                    </ul>
+                    <p>
+                        Manage your hiring process following these simple <a href="#instruction"
+                                                                             class="scrollto">steps</a>
+                    </p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="{% static 'assets/img/dashboard_img.png' %}" class="img-fluid" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="instruction" class="services section-bg">
+        <div class="container">
+
+            <div class="section-title">
+                <span>How does it work?</span>
+                <h2>How does it work?</h2>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bx-file"></i></div>
+                        <h4>Register</h4>
+                        <p>You can register using your Google account or by filling out and submitting this
+                            <a href="{% url 'authentication_register' %}">form.</a>
+                            Confirm registration by clicking on the link sent to your e-mail.
+
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bx-log-in"></i></div>
+                        <h4>Login</h4>
+                        <p>Now when you can log in, open the 'Companies' tab at your <a
+                                href="{% url 'companies_list' %}">profile.</a></p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bx-data"></i></div>
+                        <h4>Fill the data</h4>
+                        <p>First, fill in some data. Add some technologies or skills relevant to your prospective job
+                            and
+                            industries
+                            where you want to work.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bx-building"></i></div>
+                        <h4>Add a company</h4>
+                        <p>Fill in all the data you want to store about your potential employer.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bx-check"></i></div>
+                        <h4>Job application record</h4>
+                        <p>Now, once everything set up, you can create a job application record and keep it updated.
+                            Manage your application records <a href="{% url 'applications_list' %}">here.</a>
+                        </p>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bx-chart"></i></div>
+                        <h4>Get your summary</h4>
+                        <p>Your statistics and summaries are available in your profile's <a
+                                href="{% url 'dashboard' %}">dashboard</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer id="footer">
+
+        <div class="footer-top">
+
+            <div class="container">
+
+                <div class="row  justify-content-center">
+                    <div class="col-lg-6">
+                        <h3>Hirehiapp</h3>
+                        <p>Manage your recruitment history with ease</p>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                    <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                    <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                    <a href="https://www.linkedin.com/in/dmytrozimin/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container footer-bottom clearfix">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Hirehiapp</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by <a href="">Dmytro Zimin</a>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+</main>
+<!-- Vendor JS Files -->
+<script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+<script src="{% static 'assets/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'assets/vendor/counterup/counterup.min.js' %}"></script>
+<script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'assets/vendor/venobox/venobox.min.js' %}"></script>
+<script src="{% static 'assets/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+
+<!-- Template Main JS File -->
+<script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

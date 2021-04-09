@@ -164,7 +164,7 @@ AUTHENTICATION_BACKENDS = (
 SOCIALACCOUNT_ADAPTER = 'authentication.views.MyAdapter'
 
 SITE_ID = 1
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/dashboard/'
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [

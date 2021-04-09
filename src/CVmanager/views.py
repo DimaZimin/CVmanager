@@ -7,3 +7,10 @@ def error_404(request, exception):
 
 def error_500(request):
     return render(request, '500.html')
+
+
+def index(request):
+    user = request.user
+    if user.is_anonymous:
+        user = None
+    return render(request, 'index.html', {"user": user})

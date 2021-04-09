@@ -20,133 +20,133 @@
             </div>
         </div>
     {% else %}
-            <div class="row">
-                <div class="col-12 col-md-4 pb-2">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <h6 class="b">Your application summary</h6></div>
-                        <div class="card-body">
-                            {% for item in applications_zipper %}
-                                {% if item.1 %}
-                                    <p>
-                                        <b>{{ item.0 }}:</b> {{ item.1 }}
-                                    </p>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                        <hr>
-                        <div class="card-footer">
-                            <p>
-                                <b>Total applications:</b> {{ total_applications }}
-                            </p>
-                        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 pb-2">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h6 class="b">Your application summary</h6></div>
+                    <div class="card-body">
+                        {% for item in applications_zipper %}
+                            {% if item.1 %}
+                                <p>
+                                    <b>{{ item.0 }}:</b> {{ item.1 }}
+                                </p>
+                            {% endif %}
+                        {% endfor %}
                     </div>
-                </div>
-                <div class="col-12 col-md-6 pb-2">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <h6>Applications chart</h6>
-                        </div>
-                        <canvas id="applications-chart" height="300">
-                            <p>Application pie chart</p>
-                        </canvas>
-                        <div class="card-footer"></div>
+                    <hr>
+                    <div class="card-footer">
+                        <p>
+                            <b>Total applications:</b> {{ total_applications }}
+                        </p>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12 col-md-4 pb-2">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <h6>
-                                Locations
-                            </h6>
-                        </div>
-                        <div class="card-body">
-                            {% for location, quantity  in locations_zipper %}
-                                <p><b>{{ location }}:</b> {{ quantity }}</p>
-                            {% endfor %}
-                        </div>
-                        <hr>
-                        <div class="card-footer">
-                            <p><b>Total locations:</b> {{ locations_total }}</p>
-                        </div>
+            <div class="col-12 col-md-6 pb-2">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h6>Applications chart</h6>
                     </div>
+                    <canvas id="applications-chart" height="300">
+                        <p>Application pie chart</p>
+                    </canvas>
+                    <div class="card-footer"></div>
                 </div>
-                <div class="col-12 col-md-6 pb-2">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <h6>Locations chart</h6>
-                        </div>
-                        <canvas id="locations-chart" height="300">
-                            <p>Technologies pie chart</p>
-                        </canvas>
-                        <div class="card-footer"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 pb-2">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h6>
+                            Locations
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        {% for location, quantity  in locations_zipper %}
+                            <p><b>{{ location }}:</b> {{ quantity }}</p>
+                        {% endfor %}
+                    </div>
+                    <hr>
+                    <div class="card-footer">
+                        <p><b>Total locations:</b> {{ locations_total }}</p>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12 col-md-4 pb-2">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <h6>
-                                Technologies
-                            </h6>
-                        </div>
-                        <div class="card-body">
-                            {% for technology, quantity  in technologies_zipper %}
-                                <p><b>{{ technology }}:</b> {{ quantity }}</p>
-                            {% endfor %}
-                        </div>
-                        <hr>
-                        <div class="card-footer">
-                            <p><b>Total technologies:</b> {{ total_technologies }}</p>
-                        </div>
+            <div class="col-12 col-md-6 pb-2">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h6>Locations chart</h6>
                     </div>
+                    <canvas id="locations-chart" height="300">
+                        <p>Technologies pie chart</p>
+                    </canvas>
+                    <div class="card-footer"></div>
                 </div>
-                <div class="col-12 col-md-6 pb-2">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <h6>Technologies chart, %</h6>
-                        </div>
-                        <canvas id="technologies-chart" height=300">
-                            <p>Technologies pie chart</p>
-                        </canvas>
-                        <div class="card-footer"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 pb-2">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h6>
+                            Technologies
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        {% for technology, quantity  in technologies_zipper %}
+                            <p><b>{{ technology }}:</b> {{ quantity }}</p>
+                        {% endfor %}
+                    </div>
+                    <hr>
+                    <div class="card-footer">
+                        <p><b>Total technologies:</b> {{ total_technologies }}</p>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12 col-md-4 pb-2">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <h6>
-                                Industries
-                            </h6>
-                        </div>
-                        <div class="card-body">
-                            {% for industry, quantity  in industries_zipper %}
-                                <p><b>{{ industry }}:</b> {{ quantity }}</p>
-                            {% endfor %}
-                        </div>
-                        <hr>
-                        <div class="card-footer">
-                            <p><b>Total industries:</b> {{ industries_total }}</p>
-                        </div>
+            <div class="col-12 col-md-6 pb-2">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h6>Technologies chart, %</h6>
                     </div>
+                    <canvas id="technologies-chart" height=300">
+                        <p>Technologies pie chart</p>
+                    </canvas>
+                    <div class="card-footer"></div>
                 </div>
-                <div class="col-12 col-md-6 pb-2">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <h6>Industries chart, %</h6>
-                        </div>
-                        <canvas id="industries-chart" height="300">
-                            <p>Industries chart</p>
-                        </canvas>
-                        <div class="card-footer"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 pb-2">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h6>
+                            Industries
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        {% for industry, quantity  in industries_zipper %}
+                            <p><b>{{ industry }}:</b> {{ quantity }}</p>
+                        {% endfor %}
+                    </div>
+                    <hr>
+                    <div class="card-footer">
+                        <p><b>Total industries:</b> {{ industries_total }}</p>
                     </div>
                 </div>
             </div>
+            <div class="col-12 col-md-6 pb-2">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h6>Industries chart, %</h6>
+                    </div>
+                    <canvas id="industries-chart" height="300">
+                        <p>Industries chart</p>
+                    </canvas>
+                    <div class="card-footer"></div>
+                </div>
+            </div>
+        </div>
     {% endif %}
 {% endblock content %}
 {% block javascript %}
@@ -265,7 +265,19 @@
             },
             options: {
                 responsive: true,
-
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var label = data.labels[tooltipItem.index] || '';
+                            var percentage = data.datasets[0].data[tooltipItem.index];
+                            label += ": "
+                            if (label) {
+                                label += percentage + '%';
+                            }
+                            return label;
+                        }
+                    }
+                }
             }
         };
         window.onload = function () {

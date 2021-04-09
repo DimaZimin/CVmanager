@@ -7,7 +7,6 @@ from django.contrib.auth import authenticate, logout, login, update_session_auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
-from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -18,12 +17,15 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from authentication.form import UserRegistrationForm
 from authentication.tokens import account_activation_token
 
+from dashboard.views import dashboard
+
 
 class MyAdapter(DefaultSocialAccountAdapter):
     def pre_social_login(self, request, sociallogin):
         email = sociallogin.email_addresses[0]
         if sociallogin.is_existing:
-            return ImmediateHttpResponse(redirect('dashboard'))
+            login(request, user=sociallogin.user, backend='django.contrib.auth.backends.ModelBackend')
+            return ImmediateHttpResponse(redirect(dashboard))
         try:
             user = User.objects.get(email=email)
             sociallogin.connect(request, user)
@@ -46,6 +48,7 @@ def login_page(request):
         )
         if user and user.is_active:
             login(request, user)
+            messages.success(request, 'You have been logged in.')
             return redirect(
                 'dashboard'
             )

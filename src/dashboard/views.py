@@ -23,7 +23,9 @@ def dashboard(request):
     applications = Application.objects.filter(user=request.user)
     applications_labels = Application.get_statuses()
     applications_data = application_statuses_data(applications_labels, applications)
-    applications_percentage = [part / sum(applications_data) * 100 if sum(applications_data) != 0 else 0 for part in applications_data]
+    applications_percentage = [
+        round(part / sum(applications_data) * 100, 2) if sum(applications_data) != 0 else 0 for part in applications_data
+    ]
     total_applications = applications.count()
     technologies = [str(tech) for tech in itertools.chain(*[list(app.company.technologies.all()) for app in applications])]
     technologies_counted = Counter(technologies)

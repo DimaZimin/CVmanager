@@ -32,9 +32,9 @@ urlpatterns = [
     path('applications/', include('applications.urls')),
     path('companies/', include('companies.urls')),
     path('authentication/', include('authentication.urls')),
-    path('', dashboard, name='dashboard'),
     path('dashboard/', include('dashboard.urls')),
-    path('accounts/', include('allauth.urls'))
+    path('accounts/', include('allauth.urls')),
+    path('', views.index, name='index'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'CVmanager.views.error_404'
