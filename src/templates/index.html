@@ -45,8 +45,8 @@
         <nav class="nav-menu d-none d-lg-block">
             <ul>
                 {% if not user %}
-                    <li><a href="{% url 'authentication_login' %}" class="get-started-btn scrollto">Login</a></li>
-                    <li><a href="{% url 'authentication_register' %}" class="get-started-btn scrollto">Register</a></li>
+                    <li><a href="{% url 'authentication_login' %}">Login</a></li>
+                    <li><a href="{% url 'authentication_register' %}">Register</a></li>
                 {% else %}
                     <li><a href="{% url 'dashboard' %}">Go to profile, {{ user }}</a></li>
                     <li><a href="{% url 'authentication_logout' %}" class="text-danger">Logout</a></li>
@@ -90,11 +90,11 @@
                         "When I was just about to start a career, I sent hundreds of CVs to potential
                         employers. To keep track of my applications, I needed to make notes each time I send my CV. That
                         was so inconvenient." -
-                        <span class="font-weight-normal">says Michael Scott, who is now regional manager of "Dunder Mifflin" company.</span>
+                        <span class="font-weight-normal">says Michael Scott, who is now a regional manager of "Dunder Mifflin" company.</span>
                     </p>
                     <h5>
-                        With Hirehiapp this task becomes much easier!
-                        With Hirehiapp you can track your recruitment process with much more ease.
+                        With Hirehiapp organizing your job applications becomes much more manageable!
+                        The Hirehiapp allows you to keep track of your recruitment simply and effectively.
                     </h5>
                 </div>
             </div>
@@ -205,7 +205,7 @@
                 <div class="row  justify-content-center">
                     <div class="col-lg-6">
                         <h3>Hirehiapp</h3>
-                        <p>Manage your recruitment history with ease</p>
+                        <p>Managing your job applications become more convenient.</p>
                     </div>
                 </div>
 
